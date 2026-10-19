@@ -1,0 +1,53 @@
+import socket
+import ssl
+
+def grab_banner(ip, port, timeout=3):
+    """Connects to a target IP/port (handling raw TCP and SSL/TLS) and returns the banner."""
+    try:
+        # 1. Create the base TCP socket
+        raw_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        raw_socket.settimeout(timeout)
+
+        # 2. Check if the port requires SSL/TLS encryption
+        if port in [443, 8443]:
+            # Create an SSL context
+            context = ssl.create_default_context()
+            
+            # Disable SSL certificate verification so self-signed certs won't crash the script
+            context.check_hostname = False
+            context.verify_mode = ssl.CERT_NONE
+
+            # Wrap the raw TCP socket in the SSL layer
+            s = context.wrap_socket(raw_socket, server_hostname=ip)
+        else:
+            s = raw_socket
+
+        # 3. Connect and send probe if needed
+        with s:
+            s.connect((ip, port))
+
+            # Web ports (HTTP and HTTPS) require a request to respond
+            if port in [80, 8080, 443, 8443]:
+                request = f"HEAD / HTTP/1.1\r\nHost: {ip}\r\nConnection: close\r\n\r\n"
+                s.sendall(request.encode())
+
+            # 4. Read up to 1024 bytes
+            banner = s.recv(1024)
+            return banner.decode("utf-8", errors="replace").strip()
+
+    except socket.timeout:
+        return "[!] Connection timed out (no banner sent)"
+    except ConnectionRefusedError:
+        return "[!] Connection refused (port is likely closed)"
+    except ssl.SSLError as e:
+        return f"[!] SSL Error: {e}"
+    except Exception as e:
+        return f"[!] Error: {e}"
+
+
+if __name__ == "__main__":
+    target_host = input("Enter Target IP/Domain: ").strip()
+    target_port = int(input("Enter Target Port: "))
+
+    print(f"\n[*] Banner from {target_host}:{target_port}:")
+    print(grab_banner(target_host, target_port))
