@@ -1,150 +1,115 @@
-# NetScan
+# Net-Scaner 🔍
 
-A lightweight **TCP Port Scanner & Service Detector** written in Python for quick network reconnaissance. NetScan allows you to scan common ports or a custom port on a target IP address or domain name.
+![Python Version](https://img.shields.io/badge/Python-3.8%2B-blue.svg)
+![Platform](https://img.shields.io/badge/Platform-Cross--Platform-brightgreen.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-> **Version:** 1.1.0
-
----
-
-## Features
-
-* Scan popular TCP ports
-* Scan any custom TCP port
-* Supports both IP addresses and domain names
-* Displays service names for common ports
-* Colored terminal output
-* Input validation and error handling
-* Fast and lightweight
+**NetScan** is a lightweight, cross-platform TCP Port Scanner & Service Detector written in Python for quick network reconnaissance. It allows security enthusiasts and developers to scan common ports or custom targets with clear service identification and colorized terminal output.
 
 ---
 
-## Installation
+## ✨ Features
 
-### Clone the repository
-
-```bash
-git clone https://github.com/RedHat-Vibe-coder/NetScan.git
-cd NetScan
-```
-
-### Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Or install manually:
-
-```bash
-pip install requests colorama beautifulsoup4
-```
+- **Dual Scanning Modes**: Scan a curated list of popular TCP ports or target any single custom port (1–65535).
+- **Flexible Target Input**: Fully supports both raw IP addresses and domain names/URLs.
+- **Service Detection**: Automatically maps open ports to common network services (e.g., SSH, HTTP, MySQL).
+- **Colorized Output**: Styled terminal interface powered by `colorama` for instant visual feedback.
+- **Robust Error Handling**: Built-in input validation and connection timeout management.
 
 ---
 
-## Requirements
+## 📋 Requirements
 
-```
-Python 3.8+
-requests==2.31.0
-colorama==0.4.6
-beautifulsoup4==4.12.2
-```
+- **Python 3.8+**
+- Dependencies (`requests`, `colorama`, `beautifulsoup4`)
 
 ---
 
-## Usage
+## ⚙️ Installation
 
-Run the tool using:
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/RedHat-Vibe-coder/NetScan.git
+   cd NetScan
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+---
+
+## 🚀 Usage
+
+Run the tool interactively using:
 
 ```bash
 python Netscan.py
 ```
 
-You'll be presented with two scanning modes:
-
-### Option 1 – Default Ports
-
-Scans a list of common ports:
-
-* 21 (FTP)
-* 22 (SSH)
-* 23 (Telnet)
-* 25 (SMTP)
-* 53 (DNS)
-* 80 (HTTP)
-* 110 (POP3)
-* 143 (IMAP)
-* 443 (HTTPS)
-* 3306 (MySQL)
-* 3389 (RDP)
-* 8080 (HTTP Alternative)
-
-Example:
-
-```
-Enter Target IP or URL: scanme.nmap.org
-```
+Upon launching, you will be prompted to choose between two scanning modes.
 
 ---
 
-### Option 2 – Custom Port
+### 📂 Mode Options & Examples
 
-Scan any TCP port between **1–65535**.
+#### **Option 1: Default Ports (Common Services)**
+Scans a pre-configured list of popular TCP ports, including:
+* **21** (FTP), **22** (SSH), **23** (Telnet), **25** (SMTP), **53** (DNS), **80** (HTTP), **110** (POP3), **143** (IMAP), **443** (HTTPS), **3306** (MySQL), **3389** (RDP), **8080** (HTTP Alt).
 
-Example:
-
+```text
+Enter Target IP or URL: scanme.nmap.org
 ```
+
+#### **Option 2: Custom Port Scan**
+Allows you to target any specific TCP port within the range of **1 to 65535**.
+
+```text
 Enter Target IP or URL: example.com
 Enter Target Port: 443
 ```
 
 ---
 
-## Sample Output
+### 💻 Sample Terminal Output
 
-```
+```text
 PORT      NAME      STATUS
 
 22        SSH       OPEN
 80        HTTP      OPEN
 443       HTTPS     OPEN
-3306      MySQL     CLOSE
+3306      MySQL     CLOSED
 ```
 
 ---
 
-## Project Structure
+## 🗂️ Project Structure
 
-```
+```text
 NetScan/
 │
-├── Netscan.py
-├── requirements.txt
-└── README.md
+├── Netscan.py          # Main application script
+├── requirements.txt    # Project dependencies
+└── README.md           # Documentation
 ```
 
 ---
 
-## Disclaimer
+## 👤 Author
 
-This tool is intended for:
-
-* Educational purposes
-* Learning networking
-* Testing systems you own or have permission to assess
-
-Do **not** use this tool against networks or systems without authorization.
+- **Creator**: Ravaha Rizwan
+- **Version**: 1.1.0
 
 ---
 
-## Author
+## 📜 Disclaimer
 
-**Ravaha Rizwan**
+This tool is created for educational purposes, learning networking concepts, and authorized testing of systems you own or have explicit permission to assess. The developer is not responsible for any misuse or unauthorized network scanning activities.
 
 ---
 
-## License
+## 📄 License
 
-This project is licensed under the MIT License.
-
-Feel free to fork, modify, and improve the project.
+Distributed under the [MIT License](LICENSE). Feel free to fork, modify, and improve the project.
