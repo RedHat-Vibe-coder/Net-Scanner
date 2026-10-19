@@ -3,6 +3,19 @@ import os
 import socket as soc
 import time
 from datetime import datetime
+import sys
+import subprocess
+import sys
+import subprocess
+
+def clear_screen():
+    if sys.platform == "win32":
+        subprocess.run(['cls'], shell=True)
+    elif sys.platform == "linux" or sys.platform == "linux2":
+        subprocess.run(['clear'])
+
+# Run the command
+clear_screen()
 
 # Enable ANSI escape sequences in Windows Command Prompt
 os.system('')
